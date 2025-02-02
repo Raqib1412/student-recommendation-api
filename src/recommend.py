@@ -51,7 +51,7 @@ def generate_recommendations(entry_id, history_df):
 historical_df = pd.read_csv("data/historical_data.csv")
 
 # ✅ Test with a valid `id`
-valid_entry_id = "336497"  # Replace with a correct `id` from historical_data.csv
+valid_entry_id = "329504"  # Replace with a correct `id` from historical_data.csv
 
 entry_recommendations = generate_recommendations(valid_entry_id, historical_df)
 
