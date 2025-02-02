@@ -11,7 +11,7 @@ historical_df = pd.read_csv("data/historical_data.csv")
 @app.route('/recommend', methods=['GET'])
 def recommend():
     """API to return study recommendations based on `id`"""
-    entry_id = request.args.get('id', type=str)  # ✅ Get `id` from URL
+    entry_id = request.args.get('id', type=str)  # ✅ Get `id` from the query parameter
 
     if entry_id:
         recommendations = generate_recommendations(entry_id, historical_df)
