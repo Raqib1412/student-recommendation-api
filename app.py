@@ -10,15 +10,15 @@ historical_df = pd.read_csv("data/historical_data.csv")
 
 @app.route('/recommend', methods=['GET'])
 def recommend():
-    """API to return study recommendations for a quiz"""
-    quiz_id = request.args.get('quiz_id', type=str)  # Get quiz_id from URL
+    """API to return study recommendations based on `id`"""
+    entry_id = request.args.get('id', type=str)  # ✅ Get `id` from URL
 
-    if quiz_id:
-        recommendations = generate_recommendations(quiz_id, historical_df)
-        return jsonify(recommendations)
+    if entry_id:
+        recommendations = generate_recommendations(entry_id, historical_df)
+        return jsonify(recommendations)  # ✅ Return recommendations for `id`
     
-    return jsonify({"error": "No quiz ID provided"}), 400
+    return jsonify({"error": "No ID provided"}), 400  # ✅ Fix error message
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 5000))  # Get port from Render
-    app.run(host="0.0.0.0", port=port, debug=True)  # ✅ Fix: Bind to 0.0.0.0
+    app.run(host="0.0.0.0", port=port, debug=True)  # ✅ Bind to 0.0.0.0
