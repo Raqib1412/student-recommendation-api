@@ -26,16 +26,19 @@ def generate_recommendations(entry_id, history_df):
     # ✅ Filter data for the given `id`
     entry_history = history_df[history_df["id"] == entry_id]
 
-    if entry_history.empty:
-        return {"error": "ID not found in historical data", "focus_topics": [], "suggested_resources": []}
-
-    # ✅ Print data for debugging
-    print(f"\n📊 Data for Entry ID {entry_id}:")
+    # 🔍 **Debugging Print Statements**
+    print("\n🔍 Debug: Entry History for ID:", entry_id)
     print(entry_history[["topic_title", "score"]])
+
+    if entry_history.empty:
+        print("❌ ERROR: ID not found in historical data!")
+        return {"error": "ID not found in historical data", "focus_topics": [], "suggested_resources": []}
 
     # ✅ Identify weak topics (score < 50)
     weak_topics = entry_history.groupby("topic_title")["score"].mean()
     weak_topics = weak_topics[weak_topics < 50].index.tolist()
+
+    print("\n✅ Weak Topics Identified:", weak_topics)  # 🔍 Debugging Output
 
     recommendations = {
         "focus_topics": weak_topics,
